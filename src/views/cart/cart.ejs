@@ -1,0 +1,58 @@
+<div class="mx-auto p-6 max-w-3xl">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">Your Cart</h1>
+
+  <% if (cart && cart.length > 0) { %>
+  <div class="space-y-4">
+    <% cart.forEach(item => { %>
+    <div
+      class="flex items-center justify-between bg-gray-100 p-4 rounded-md shadow"
+    >
+      <form action="/cart/remove" method="POST" class="flex items-center gap-4">
+        <input type="hidden" name="product_id" value="<%= item.soap_id %>" />
+        <button
+          type="submit"
+          class="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700 transition"
+        >
+          Remove
+        </button>
+        <img
+          src="<%= item.image_path %>"
+          alt="<%= item.soap_name %>"
+          class="w-16 h-16 object-cover rounded-md"
+        />
+        <h3 class="text-lg font-semibold"><%= item.soap_name %></h3>
+      </form>
+
+      <div>
+        <p class="text-gray-700 text-right">
+          Price: <span class="font-bold">$<%= item.soap_price %></span>
+        </p>
+        <p class="text-gray-700 text-right">
+          Quantity: <span class="font-bold"><%= item.quantity %></span>
+        </p>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+
+  <div class="flex justify-between">
+    <p class="text-xl font-semibold text-gray-800 mt-6 text-right">Total:</p>
+    <p class="text-xl font-semibold text-gray-800 mt-6 text-right">
+      $ <%= totalPrice %>
+    </p>
+  </div>
+
+  <form action="/cart/buy" method="POST" class="mt-4">
+    <input type="hidden" name="total_price" value="<%= totalPrice %>" />
+    <button
+      type="submit"
+      class="bg-green-600 text-white w-full py-3 rounded-md text-lg hover:bg-green-700 transition"
+    >
+      Buy Now
+    </button>
+  </form>
+
+  <% } else { %>
+  <p class="text-gray-500 text-lg text-center mt-6">Your cart is empty!</p>
+  <% } %>
+</div>

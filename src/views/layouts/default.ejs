@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header class="flex justify-between pb-5">
+      <%- include('../partials/header') %>
+    </header>
+    <main class="flex-grow">
+      <% if (flash.length > 0) { %>
+      <div class="flash-messages">
+        <% flash.forEach(msg => { %>
+        <div class="alert alert-<%= msg.type %>"><%= msg.message %></div>
+        <% }); %>
+      </div>
+      <% } %> <%- body %>
+    </main>
+    <footer class="bg-blue-500 h-25 flex items-center justify-center mt-15">
+      <%- include('../partials/footer') %>
+    </footer>
+  </body>
+</html>

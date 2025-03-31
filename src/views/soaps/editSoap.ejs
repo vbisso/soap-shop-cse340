@@ -1,0 +1,29 @@
+<form action="/soap/update-soap" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="soap_id" value="<%= soap.soap_id %>">
+
+    <label for="soap_name">Soap Name:</label>
+    <input type="text" name="soap_name" value="<%= soap.soap_name %>" required class="border p-2 rounded w-full" />
+
+    <label for="category_id">Category:</label>
+    <select name="category_id" required class="border p-2 rounded w-full">
+      <option value="1" <%= soap.category_id === 1 ? 'selected' : '' %>>Body</option>
+      <option value="2" <%= soap.category_id === 2 ? 'selected' : '' %>>Face</option>
+      <option value="3" <%= soap.category_id === 3 ? 'selected' : '' %>>Massage Therapy</option>
+    </select>
+
+
+    <label for="soap_price">Price:</label>
+    <input type="numeric(10,2)" name="soap_price" value="<%= soap.soap_price %>" required class="border p-2 rounded w-full" />
+
+    <label for="soap_description">Description:</label>
+    <textarea name="soap_description" required class="border p-2 rounded w-full"><%= soap.soap_description %></textarea>
+
+    <label for="image_path">Image File:</label>
+    <input type="file" name="image_path" accept="image/*" class="border p-2 rounded w-full" />
+
+    <div class="mt-2">
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+        Update Soap
+      </button>
+    </div>
+  </form>

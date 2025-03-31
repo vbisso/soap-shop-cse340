@@ -1,0 +1,42 @@
+<h1 class="text-3xl my-8 text-center">All the products by <%=title%></h1>
+
+<div class="grid grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-8 mx-8">
+  <% soaps.forEach((soap) => { %>
+  <div class="soap-card overflow-hidden">
+    <a href="/soap/<%= soap.soap_id %>" class="block">
+      <img
+        src="<%= soap.image_path %>"
+        alt="<%= soap.soap_name %>"
+        class="w-full h-70 object-cover"
+      />
+      <div class="p-4">
+        <h3 class="text-lg font-semibold text-gray-800">
+          <%= soap.soap_name %>
+        </h3>
+        <p class="text-sm text-gray-600 mt-1"><%= soap.soap_description %></p>
+        <p class="text-yellow-500 font-medium mt-2">
+          <%= soap.average_rating %> ⭐
+        </p>
+        <p class="text-lg font-bold text-gray-900">
+          Price: $<%= soap.soap_price %>
+        </p>
+      </div>
+    </a>
+
+    <form
+      id="add-to-cart-form"
+      action="/category/<%= soap.category_id %>/add-to-cart"
+      method="POST"
+      class="p-4"
+    >
+      <input type="hidden" name="product_id" value="<%= soap.soap_id %>" />
+      <button
+        type="submit"
+        class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-600 transition"
+      >
+        Add to Cart
+      </button>
+    </form>
+  </div>
+  <% }); %>
+</div>

@@ -1,0 +1,53 @@
+<div class="max-w-5xl mx-auto overflow-hidden p-6">
+  <div class="flex justify-between items-center">
+    <div class="flex flex-col items-center">
+      <img
+        src="<%= soap.image_path %>"
+        alt="<%= soap.soap_name %>"
+        class="w-full h-full object-cover rounded-md"
+      />
+    </div>
+
+    <div class="mt-4 text-center text-left w-1/2">
+      <h3 class="text-2xl font-bold text-gray-800"><%= soap.soap_name %></h3>
+      <p class="text-gray-600 mt-2"><%= soap.soap_description %></p>
+      <p class="mt-2 text-lg font-semibold text-yellow-500">
+        <%= average_rating %> ⭐
+      </p>
+      <p class="mt-2 text-lg font-bold text-gray-900">
+        Price: $ <%= soap.soap_price %>
+      </p>
+
+      <form
+        id="add-to-cart-form"
+        action="/category/<%= soap.category_id %>/add-to-cart"
+        method="POST"
+        class="mt-4"
+      >
+        <input type="hidden" name="product_id" value="<%= soap.soap_id %>" />
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-700 transition-all duration-200"
+        >
+          Add to Cart
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="mt-6 border-t pt-4">
+    <h4 class="text-lg font-semibold text-gray-800">Reviews:</h4>
+
+    <% if (reviews.length > 0) { %>
+    <ul class="mt-2 space-y-2">
+      <% reviews.forEach((review) => { %>
+      <li class="bg-gray-100 p-3 rounded-md text-gray-700">
+        <%= review.review %>
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p class="text-gray-500 mt-2">No reviews yet.</p>
+    <% } %>
+  </div>
+</div>

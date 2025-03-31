@@ -1,0 +1,163 @@
+
+    <section class="dashboard p-6 bg-gray-100 rounded-md mt-6">
+      <h3 class="text-2xl font-semibold text-gray-800">Your Dashboard:</h3>
+      <!-- company stats -->
+      <h2 class="text-xl font-semibold text-gray-800 mt-4">Company Stats</h2>
+      <ul class="mt-2 grid grid-cols-3 gap-4">
+        <li class="bg-white p-4 rounded-md shadow">
+          <p class="text-gray-700 font-semibold">Orders:</p>
+          <p><%= orderStatsAll %> Orders</p>
+          <p class="text-green-600 font-bold">
+            $<%= orderStatsRevenue %> Revenue
+          </p>
+        </li>
+        <li class="bg-white p-4 rounded-md shadow">
+          <p class="text-gray-700 font-semibold">Tickets:</p>
+          <a href="/tasks/#tickets" class="text-blue-600 underline">View</a>
+          <p><%= ticketsStatsAll %> Tickets</p>
+          <p class="text-red-600"><%= ticketsStatsOpen %> Open</p>
+          <p class="text-green-600"><%= ticketsStatsClosed %> Closed</p>
+        </li>
+        <li class="bg-white p-4 rounded-md shadow">
+          <p class="text-gray-700 font-semibold">Messages:</p>
+          <a href="/tasks/#messages" class="text-blue-600 underline">View</a>
+          <p><%= messagesStatsAll %> Messages</p>
+          <p class="text-red-600"><%= messagesStatsUnread %> Unread</p>
+          <p class="text-green-600"><%= messagesStatsCompleted %> Completed</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- admin only view -->
+<% if (user_role == 3) { %> 
+
+    <div class="mt-6">
+      <button onclick="toggleSection('usersRolesSection', this)"  class="w-full text-left text-xl font-semibold text-gray-800 bg-gray-200 p-3 rounded-md hover:bg-gray-300 transition flex justify-between">
+        <p>Manage Users and Roles</p> 
+        <p class="collapsible-toggle">▼</p>
+      </button>
+      <div id="usersRolesSection"  class="collapsible-content hidden mt-2 p-4 bg-white rounded-md shadow">
+        <table class="w-full mt-2 bg-white shadow-md rounded-lg overflow-hidden">
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="p-2 text-left">User ID</th>
+              <th class="p-2 text-left">Name</th>
+              <th class="p-2 text-left">Email</th>
+              <th class="p-2 text-left">Role</th>
+              <th class="p-2 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+            <tr class="border-t">
+              <td class="p-2"><%= user.user_id %></td>
+              <td class="p-2"><%= user.name %></td>
+              <td class="p-2"><%= user.email %></td>
+              <td class="p-2"><%= user.role_name %></td>
+
+              <td class="p-2 flex space-x-2">
+
+                <form action="/dashboard/update-role" method="POST">
+                  <input type="hidden" name="user_id" value="<%= user.user_id %>" />
+                  <select name="new_role_id" class="border p-1 rounded">
+                    <option value="1" <% if (user.role_name === 'user') { %>selected<% } %>>User</option>
+                    <option value="2" <% if (user.role_name === 'staff') { %>selected<% } %>>Staff</option>
+                    <option value="3" <% if (user.role_name === 'admin') { %>selected<% } %>>Admin</option>
+                  </select>
+                  <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">
+                    Update
+                  </button>
+                </form>
+
+                <form action="/dashboard/delete-user" method="POST" onsubmit="return confirm('Are you sure?');">
+                  <input type="hidden" name="user_id" value="<%= user.user_id %>" />
+                  <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                    Remove
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- manage site content -->
+    <div class="mt-6">
+      <button onclick="toggleSection('siteContentSection', this)" class="w-full text-left text-xl font-semibold text-gray-800 bg-gray-200 p-3 rounded-md hover:bg-gray-300 transition flex justify-between">
+        <p>Manage Site Content</p> 
+        <p class="collapsible-toggle">▼</p>
+      </button>
+
+      <div id="siteContentSection" class="collapsible-content hidden mt-2 p-4 bg-white rounded-md shadow">
+
+        <!-- add new product -->
+        <div class="mt-4 bg-white p-4 shadow-md rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-800">Add a New Product</h3>
+          <form action="/dashboard/add-soap" method="POST" enctype="multipart/form-data">
+            <div class="grid grid-cols-2 gap-4 mt-2">
+
+              <label for="soap_name">Soap Name:</label>
+              <input type="text" name="soap_name" placeholder="Soap Name" required class="border p-2 rounded w-full" />
+
+              <label for="category_id">Category:</label>
+              <select name="category_id" required class="border p-2 rounded w-full" > 
+                <option value="">Category</option>
+                <option value="1">Body</option>
+                <option value="2">Face</option>
+                <option value="3">Massage Therapy</option>
+              </select>
+              
+              <label for="soap_price">Price:</label>
+              <input type="number" name="soap_price" placeholder="Price ($)" required class="border p-2 rounded w-full" />
+
+              <label for="soap_description">Description:</label>
+              <textarea name="soap_description" placeholder="Description" required class="border p-2 rounded w-full"></textarea>
+
+              <label for="image_path">Image File:</label>
+              <input type="file" name="image_path"  required  accept="image/*" class="border p-2 rounded w-full" />
+            </div>
+            <button type="submit" class="mt-2 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+              Add Product
+            </button>
+          </form>
+        </div>
+        <!-- edit product -->
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-gray-800">Manage Existing Products</h3>
+          <ul class="mt-2 space-y-3">
+            <% soaps.forEach(soap => { %>
+            <li class="p-4 bg-gray-100 rounded-md shadow flex justify-between items-center">
+              <div>
+                <p><strong>Name:</strong> <%= soap.soap_name %></p>
+                <p><strong>Price:</strong> $<%= soap.soap_price %></p>
+                <p><strong>Description:</strong> <%= soap.soap_description %></p>
+                <P><strong>Category:</strong><%= soap.category_name %></P>
+              </div>
+              <div class="flex space-x-2">
+                
+                <a href="/soap/edit-soap/<%= soap.soap_id %>" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">
+                  Edit
+                </a>
+
+
+                <!-- deleting products -->
+                <form action="/dashboard/delete-soap" method="POST" onsubmit="return confirm('Are you sure?');">
+                  <input type="hidden" name="soap_id" value="<%= soap.soap_id %>" />
+                  <button type="submit" class="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </li>
+            <% }); %>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    
+  <%}%>
+
+<script src="/js/collapsable-sections.js" defer></script>

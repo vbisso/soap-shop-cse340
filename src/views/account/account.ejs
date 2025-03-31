@@ -1,0 +1,136 @@
+<div class="mx-auto p-10">
+  <h1 class="text-3xl font-bold text-gray-900 mb-4">
+    Welcome to your account, <%= name %>
+  </h1>
+
+  <!-- profile section -->
+  <div class="border-b pb-4 mb-4">
+    <h2 class="text-xl font-semibold text-gray-800">Your Profile</h2>
+    <p class="text-gray-600 mt-1"><strong>Name:</strong> <%= name %></p>
+    <p class="text-gray-600"><strong>Email:</strong> <%= email %></p>
+  </div>
+
+  <% if (user_role=='user') { %>
+
+  <!-- orders section -->
+  <% if (orders && orders.length > 0) { %>
+  <div class="border-b pb-4 mb-4">
+    <h2 class="text-xl font-semibold text-gray-800">Your Orders</h2>
+    <ul class="space-y-4 mt-2">
+      <% orders.forEach(order => { %>
+      <li class="p-4 bg-gray-100 rounded-md shadow">
+        <p><strong>Order ID:</strong> <%= order.order_id %></p>
+        <p><strong>Total Price:</strong> $<%= order.total_price %></p>
+        <p>
+          <strong>Order Date:</strong> <%= new
+          Date(order.order_date).toLocaleDateString() %>
+        </p>
+        <form
+          action="/account/ticket/<%= order.order_id %>"
+          method="POST"
+          class="mt-2"
+        >
+          <input type="hidden" name="order_id" value="<%= order.order_id %>" />
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            Create Ticket
+          </button>
+        </form>
+        <h4 class="font-semibold text-gray-800 mt-3">Items:</h4>
+        <ul class="mt-2 space-y-2">
+          <% order.items.forEach(item => { %>
+          <li class="bg-white p-3 rounded-md shadow-sm">
+            <p><strong>Product:</strong> <%= item.soap_name %></p>
+            <p><strong>Quantity:</strong> <%= item.quantity %></p>
+            <button
+              class="bg-green-600 text-white px-3 py-1 rounded-md mt-2 hover:bg-green-700 transition add-review-button"
+            >
+              Write a Review
+            </button>
+
+            <form
+              action="/account/submit-review"
+              method="post"
+              class="review-form hidden mt-2 bg-gray-50 p-3 rounded-md"
+            >
+              <input type="hidden" name="soap_id" value="<%= item.soap_id %>" />
+              <label for="rating" class="block text-gray-700 font-medium"
+                >Rate this product:</label
+              >
+              <select
+                name="rating"
+                id="rating"
+                required
+                class="block w-full p-2 border border-gray-300 rounded-md mt-1"
+              >
+                <option value="">Select a rating</option>
+                <option value="1">⭐☆☆☆☆ (1)</option>
+                <option value="2">⭐⭐☆☆☆ (2)</option>
+                <option value="3">⭐⭐⭐☆☆ (3)</option>
+                <option value="4">⭐⭐⭐⭐☆ (4)</option>
+                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+              </select>
+              <textarea
+                type="text"
+                name="review"
+                placeholder="Write a review"
+                required
+                class="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              ></textarea>
+              <div class="flex space-x-2 mt-2">
+                <button
+                  type="submit"
+                  class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  class="bg-gray-400 text-white px-4 py-2 rounded-md hover:bg-gray-500 transition cancel-button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </li>
+          <% }) %>
+        </ul>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } else { %>
+  <p class="text-gray-500">You have no orders yet.</p>
+  <% } %>
+
+  <!-- Tickets Section -->
+  <div class="border-b pb-4 mb-4">
+    <h2 class="text-xl font-semibold text-gray-800">Your Tickets</h2>
+    <% if (tickets.length > 0) { %>
+    <ul class="space-y-3 mt-2">
+      <% tickets.forEach(ticket => { %>
+      <li class="bg-gray-100 p-3 rounded-md shadow">
+        <p><strong>Ticket ID:</strong> <%= ticket.ticket_id %></p>
+        <p><strong>Order ID:</strong> <%= ticket.order_id %></p>
+        <p><strong>Name:</strong> <%= ticket.name %></p>
+        <p><strong>Subject:</strong> <%= ticket.subject %></p>
+        <p><strong>Message:</strong> <%= ticket.message %></p>
+        <p>
+          <strong>Date:</strong> <%= new
+          Date(ticket.created_at).toLocaleDateString() %>
+        </p>
+        <p><strong>Status:</strong> <%= ticket.status %></p>
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p class="text-gray-500">No tickets yet.</p>
+    <% } %>
+  </div>
+
+  <% } %>
+</div>
+
+<script src="/js/review-input.js"></script>

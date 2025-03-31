@@ -1,0 +1,12 @@
+<h1>Customer Support :></h1>
+<p>
+  We are glad to help you! Please fill out the form below to create a ticket.
+</p>
+<form action="/tickets/submit-ticket" method="POST">
+  <input type="hidden" name="order_id" value="<%= order_id %>" />
+  <label for="subject">Subject:</label>
+  <input type="text" id="subject" name="subject" required />
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" required></textarea>
+  <button type="submit">Create ticket on this order</button>
+</form>
