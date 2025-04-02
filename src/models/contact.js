@@ -55,20 +55,9 @@ export const getMessagesStats = async (query) => {
 };
 export const updateMessageStatus = async (message_id, new_status) => {
   try {
-    const statusResult = await dbClient.query(
-      "SELECT status_id FROM messages_status WHERE status = $1",
-      [new_status]
-    );
-
-    if (statusResult.rows.length === 0) {
-      throw new Error("Invalid status");
-    }
-
-    const status_id = statusResult.rows[0].status_id;
-
     await dbClient.query(
-      "UPDATE messages SET status_id = $1 WHERE message_id = $2",
-      [status_id, message_id]
+      "UPDATE messages SET status_id = $1 WHERE message_id = $2 ",
+      [new_status, message_id]
     );
 
     return true;

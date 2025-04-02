@@ -4,20 +4,20 @@ import {
   updateMessageStatus,
   deleteMessage,
 } from "../../models/contact.js";
-import { getTickets } from "../../models/tickets.js";
+import { getAllTickets, updateTicketStatus } from "../../models/tickets.js";
 
 const router = Router();
 
 router.get("/", async (req, res) => {
   const messages = await getMessages();
-  const tickets = await getTickets();
-  console.log(tickets);
+  const tickets = await getAllTickets();
+  //console.log(tickets);
 
   res.render("tasks/tasks", { title: "Task Management", messages, tickets });
 });
 export default router;
 
-router.post("/update-status", async (req, res) => {
+router.post("/update-message-status", async (req, res) => {
   const message_id = req.body.message_id;
   const status = req.body.status;
 
@@ -35,4 +35,12 @@ router.post("/delete-message", async (req, res) => {
     req.flash("success", "Message deleted successfully!");
     res.redirect("/tasks");
   }
+});
+
+router.post("/update-ticket-status", async (req, res) => {
+  const ticket_id = req.body.ticket_id;
+  const status_id = req.body.status;
+  await updateTicketStatus(ticket_id, status_id);
+  req.flash("success", "Ticket status updated successfully!");
+  res.redirect("/tasks");
 });

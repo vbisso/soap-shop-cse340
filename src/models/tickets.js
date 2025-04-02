@@ -32,10 +32,15 @@ export const getTickets = async (user_id) => {
       `
       SELECT t.ticket_id, u.name, t.subject, t.message, t.created_at, ts.status, t.created_at
       FROM tickets t
+
       LEFT JOIN ticket_status ts ON t.status_id = ts.status_id
 	    LEFT JOIN users u ON t.user_id = u.user_id
+
+      WHERE t.user_id = $1
       ORDER BY t.created_at DESC
-      `
+
+      `,
+      [user_id]
     );
 
     return result.rows;
@@ -45,6 +50,17 @@ export const getTickets = async (user_id) => {
   }
 };
 
+export const getAllTickets = async () => {
+  try {
+    const result = await dbClient.query(
+      "SELECT * FROM tickets JOIN users ON tickets.user_id = users.user_id JOIN ticket_status ON tickets.status_id = ticket_status.status_id"
+    );
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching tickets:", error);
+    return [];
+  }
+};
 export const getTicketsStats = async (query) => {
   try {
     let sqlQuery;

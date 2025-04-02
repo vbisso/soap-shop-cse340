@@ -1,5 +1,5 @@
 
-    <section class="dashboard p-6 bg-gray-100 rounded-md mt-6">
+    <section class="dashboard p-6 bg-gray-100 rounded-md mt-6 mx-8">
       <h3 class="text-2xl font-semibold text-gray-800">Your Dashboard:</h3>
       <!-- company stats -->
       <h2 class="text-xl font-semibold text-gray-800 mt-4">Company Stats</h2>
@@ -31,7 +31,7 @@
     <!-- admin only view -->
 <% if (user_role == 3) { %> 
 
-    <div class="mt-6">
+    <div class="mt-6 mx-8">
       <button onclick="toggleSection('usersRolesSection', this)"  class="w-full text-left text-xl font-semibold text-gray-800 bg-gray-200 p-3 rounded-md hover:bg-gray-300 transition flex justify-between">
         <p>Manage Users and Roles</p> 
         <p class="collapsible-toggle">▼</p>
@@ -44,7 +44,7 @@
               <th class="p-2 text-left">Name</th>
               <th class="p-2 text-left">Email</th>
               <th class="p-2 text-left">Role</th>
-              <th class="p-2 text-left">Actions</th>
+              <th class="p-2 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +55,7 @@
               <td class="p-2"><%= user.email %></td>
               <td class="p-2"><%= user.role_name %></td>
 
-              <td class="p-2 flex space-x-2">
+              <td class="p-2 flex justify-center space-x-2 ">
 
                 <form action="/dashboard/update-role" method="POST">
                   <input type="hidden" name="user_id" value="<%= user.user_id %>" />
@@ -64,7 +64,7 @@
                     <option value="2" <% if (user.role_name === 'staff') { %>selected<% } %>>Staff</option>
                     <option value="3" <% if (user.role_name === 'admin') { %>selected<% } %>>Admin</option>
                   </select>
-                  <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700">
+                  <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 ml-2">
                     Update
                   </button>
                 </form>
@@ -84,7 +84,7 @@
     </div>
 
     <!-- manage site content -->
-    <div class="mt-6">
+    <div class="mt-6 mx-8">
       <button onclick="toggleSection('siteContentSection', this)" class="w-full text-left text-xl font-semibold text-gray-800 bg-gray-200 p-3 rounded-md hover:bg-gray-300 transition flex justify-between">
         <p>Manage Site Content</p> 
         <p class="collapsible-toggle">▼</p>
