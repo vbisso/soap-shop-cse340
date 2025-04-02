@@ -1,2 +1,68 @@
-<h1 class="text-3xl">Welcome to My Website</h1>
-<p>This is the home page, dynamically rendered using the layout.</p>
+<section
+  class="relative h-screen bg-cover bg-center"
+  style="background-image: url('images/hero.jpg')"
+>
+  <div class="absolute inset-0 bg-black opacity-30"></div>
+  <div class="relative z-10 container mx-auto text-center px-4 py-20">
+    <h1 class="text-white text-5xl font-bold leading-tight mb-4">
+      The Soap Apothecary
+    </h1>
+    <p class="text-white text-lg mb-8">
+      Handmade Soaps for Mind, Body, and Soul
+    </p>
+    <a
+      href="#start"
+      class="bg-[#72813A] text-white py-3 px-6 rounded-lg text-lg hover:bg-[#4A5426] transition duration-300 ease-in-out"
+      >Explore our products</a
+    >
+  </div>
+</section>
+
+<section id="start" class="py-12">
+  <div class="max-w-screen-lg mx-auto text-center">
+    <h2 class="text-4xl font-extrabold text-gray-800 mb-6">
+      Explore our range of handcrafted soaps for every need.
+    </h2>
+    <p class="text-lg text-gray-600 mb-8">
+      Whether you’re looking for a refreshing face soap, a soothing body soap,
+      or a therapeutic massage soap, we have something to elevate your skincare
+      routine.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 r">
+      <a href="/category/view/1">
+        <div class="bg-white p-6 rounded-lg shadow-lg h-full">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Face Soaps</h3>
+          <p class="text-gray-600">
+            Our gentle face soaps are made with natural ingredients to cleanse
+            and nourish your skin, leaving your face feeling fresh and
+            revitalized.
+          </p>
+        </div>
+      </a>
+
+      <a href="/category/view/2" >
+        <div class="bg-white p-6 rounded-lg shadow-lg h-full">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Body Soaps</h3>
+          <p class="text-gray-600">
+            Indulge in our luxurious body soaps that moisturize and rejuvenate
+            your skin, with rich lather and soothing scents to enhance your
+            bathing experience.
+          </p>
+        </div>
+      </a>
+
+      <a href="/category/view/3" ">
+        <div class="bg-white p-6 rounded-lg shadow-lg h-full">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+            Massage Therapy Soaps
+          </h3>
+          <p class="text-gray-600">
+            Relax and unwind with our therapeutic massage soaps, crafted to help
+            relieve stress and promote relaxation with every use.
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+</section>

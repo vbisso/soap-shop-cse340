@@ -4,6 +4,10 @@
 import configNodeEnv from "./src/middleware/node-env.js";
 import express from "express";
 import fileUploads from "./src/middleware/file-uploads.js";
+import {
+  notFoundHandler,
+  globalErrorHandler,
+} from "./src/middleware/error-handler.js";
 
 //FLASH MESSAGES AND SESSION
 import session from "express-session";
@@ -99,7 +103,10 @@ app.use("/contact", contactRoute);
 app.use("/tasks", tasksRoute);
 app.use("/cart", cartRoute);
 app.use("/tickets", createTicket);
-
+// 404 Handler - If no route matches, this runs
+app.use(notFoundHandler);
+// Global Error Handler - Catches all errors
+app.use(globalErrorHandler);
 /**
  * Start the server
  */

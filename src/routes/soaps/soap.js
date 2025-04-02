@@ -15,7 +15,7 @@ router.get("/:id", async (req, res) => {
   const reviewsBySoap = await getReviews(soapDetails.soap_id);
   const ratingsBySoap = await getAverageRatingsForSoaps([soapDetails.soap_id]);
 
-  console.log(ratingsBySoap);
+  //console.log(ratingsBySoap);
 
   res.render("soaps/soap", {
     soap: soapDetails,

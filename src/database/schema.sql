@@ -108,18 +108,18 @@ ON CONFLICT (category_id) DO NOTHING;
 ;
 -- Insert initial soaps
 INSERT INTO soaps (soap_name, soap_description, soap_price, image_path, category_id) VALUES
-    ('Lavender Bliss', 'A soothing lavender-scented soap for relaxation.', 5.99, '', 1),
-    ('Honey Oatmeal', 'Gentle exfoliating soap with honey and oatmeal.', 6.49, '', 1),
-    ('Charcoal Detox', 'Activated charcoal soap to cleanse and purify skin.', 7.99, '', 2),
-    ('Tea Tree Fresh', 'Tea tree oil-infused soap for acne-prone skin.', 6.99, '', 2),
-    ('Coconut Paradise', 'Moisturizing coconut soap for smooth skin.', 5.49, '', 1),
-    ('Rose Petal Glow', 'Luxurious rose-scented soap for a radiant complexion.', 8.99, '', 2),
-    ('Eucalyptus Mint', 'A refreshing soap infused with eucalyptus and mint. Designed with a unique shape to gently massage the skin while cleansing.', 7.49, '', 3),
-    ('Vanilla Shea', 'Creamy vanilla shea butter soap for deep hydration.', 6.79, '', 1),
-    ('Citrus Zest', 'Invigorating citrus-scented soap for an energy boost.', 5.99, '', 1),
-    ('Chamomile Comfort', 'Calming chamomile soap for sensitive skin.', 6.59, '', 2),
-    ('Muscle Relief Bar', 'A firm, invigorating soap with a shape inspired by massagers, featuring raised peaks that help stimulate circulation and soothe sore muscles.', 8.29, '', 3),
-    ('Deep Tissue Therapy', 'Designed for ultimate relaxation, this soap has molded ridges that work like a mini-massager, easing tension while cleansing the skin.', 8.99, '', 3)
+    ('Lavender Bliss', 'A soothing lavender-scented soap for relaxation.', 5.99, '/images/lavender.jpg', 1),
+    ('Honey Oatmeal', 'Gentle exfoliating soap with honey and oatmeal.', 6.49, '/images/honey-oatmeal.jpg', 1),
+    ('Charcoal Detox', 'Activated charcoal soap to cleanse and purify skin.', 7.99, '/images/charcoal-detox.jpg', 2),
+    ('Tea Tree Fresh', 'Tea tree oil-infused soap for acne-prone skin.', 6.99, '/images/tea-tree.jpg', 2),
+    ('Coconut Paradise', 'Moisturizing coconut soap for smooth skin.', 5.49, '/images/coco.jpg', 1),
+    ('Rose Petal Glow', 'Luxurious rose-scented soap for a radiant complexion.', 8.99, '/images/rose-petal.jpg', 2),
+    ('Eucalyptus Mint', 'A refreshing soap infused with eucalyptus and mint. Designed with a unique shape to gently massage the skin while cleansing.', 7.49, '/images/eucalyptus.jpg', 3),
+    ('Vanilla Shea', 'Creamy vanilla shea butter soap for deep hydration.', 6.79, '/images/vanilla.jpg', 1),
+    ('Citrus Zest', 'Invigorating citrus-scented soap for an energy boost.', 5.99, '/images/citrus.jpg', 1),
+    ('Chamomile Comfort', 'Calming chamomile soap for sensitive skin.', 6.59, '/images/chamomile.jpg', 2),
+    ('Muscle Relief Bar', 'A firm, invigorating soap with a shape inspired by massagers, featuring raised peaks that help stimulate circulation and soothe sore muscles.', 8.29, '/images/massage.jpg', 3),
+    ('Deep Tissue Therapy', 'Designed for ultimate relaxation, this soap has molded ridges that work like a mini-massager, easing tension while cleansing the skin.', 8.99, '/images/deeptissue.jpg', 3)
 ON CONFLICT (soap_name) DO NOTHING;
 
 INSERT INTO roles (role_id, role_name) VALUES
