@@ -14,10 +14,10 @@
   font-family: "TanAsh";
 }
 
-/* Hidden Class */
+/* Hidden Class
 .hidden {
   display: none;
-}
+} */
 
 /* success and error flash message  */
 .alert-success {

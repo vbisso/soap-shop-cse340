@@ -1,14 +1,19 @@
-<h1 class="text-3xl my-8 text-center">All the products by <%=title%></h1>
+<h1 class="text-2xl md:text-3xl my-10 px-2 text-center">
+  All the products by <%=title%>
+</h1>
 
-<div class="grid grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-8 mx-8">
+<div
+  class="flex flex-col items-center md:grid md:grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-8 mx-8"
+>
   <% soaps.forEach((soap) => { %>
-  <div class="soap-card overflow-hidden">
+  <div class="soap-card flex flex-col items-center">
     <a href="/soap/<%= soap.soap_id %>" class="block">
       <img
         src="<%= soap.image_path %>"
         alt="<%= soap.soap_name %>"
-        class="w-full h-100 object-cover"
+        class="w-80 md:w-100 md:h-100 object-cover"
       />
+
       <div class="p-4">
         <h3 class="text-lg font-semibold text-gray-800">
           <%= soap.soap_name %>
@@ -32,7 +37,7 @@
       <input type="hidden" name="product_id" value="<%= soap.soap_id %>" />
       <button
         type="submit"
-        class="w-full bg-[#72813A] hover:bg-[#4A5426] text-white py-2 px-4 rounded-lg font-medium transition"
+        class="w-50 md:w-100 bg-[#72813A] hover:bg-[#4A5426] text-white py-2 px-4 rounded-lg font-medium transition"
       >
         Add to Cart
       </button>
